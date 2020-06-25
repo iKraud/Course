@@ -1,0 +1,32 @@
+#spring.thymeleaf.cache=false
+#dri
+#welcome.message=Hello Thymeleaf
+#error.message=First Name & Last Name is required!
+
+# ===============================
+# = THYMELEAF
+# ===============================
+spring.thymeleaf.check-template-location=true
+spring.thymeleaf.encoding=UTF-8
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
+spring.thymeleaf.servlet.content-type=text/html
+spring.thymeleaf.cache=false
+
+#spring.liquibase.change-log=classpath:/db/changelog-profiles/changelog-master.xml
+
+#spring.liquibase.change-log=classpath:/liquibase/db.changelog.xml
+
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/sushi-ru
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+#
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQL9Dialect
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+
+# Tuning File Upload Limits
+spring.servlet.multipart.max-file-size=1128KB
+spring.servlet.multipart.max-request-size=1128KB

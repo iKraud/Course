@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="839" author="sharafanoksana">
+
+
+<!--        <createTable tableName="users_roles">-->
+<!--            <column name="id" type="int" autoIncrement="true" startWith="3">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="user_id" type="int">-->
+<!--                <constraints nullable="true" foreignKeyName="fk_users_id" references="users(id)"/>-->
+<!--            </column>-->
+<!--            <column name="role_id" type="int">-->
+<!--                <constraints nullable="true" foreignKeyName="fk_role_id" references="role(id)"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+
+        <addColumn catalogName="sushi-ru"
+                   schemaName="public"
+                   tableName="orders">
+            <column name="payment_id" type="int"/>
+        </addColumn>
+
+        <createTable tableName="payment">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <insert tableName="payment">
+            <column name="title" value="Наличный"/>
+        </insert>
+        <insert tableName="payment">
+            <column name="title" value="Безналичный"/>
+        </insert>
+
+        <createTable tableName="orders_payment">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="orders_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_orders_id" references="orders(id)"/>
+            </column>
+            <column name="payment_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_payment_id" references="payment(id)"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>

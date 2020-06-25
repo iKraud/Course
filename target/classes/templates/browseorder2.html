@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Просмотр заказа </title>
+</head>
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="../static/css/style1.css" th:href="@{/static/css/style1.css}" rel="stylesheet"/>
+
+<body>
+<div class="pageStyle">
+
+    <a href="/admin/listorders"> Перечень заказов </a>
+    <br/>
+
+    <h4> Просмотр заказа </h4>
+    <table width="100%" class="table">
+        <thead>
+        <tr>
+            <th scope="col"> Название еды </th>
+            <th scope="col"> Описание </th>
+            <th scope="col"> Количество </th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr  th:each="item : ${browseorder}">
+                <td scope="row">
+                    <span th:text="${item.getFoodName()}"> </span>
+                </td>
+                <td scope="row">
+                    <span th:text="${item.getFoodDescription()}"> </span>
+                </td>
+                <td scope="row">
+                    <span th:text="${item.getFoodQuantity()}"> </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

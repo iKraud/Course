@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Редактирвоание типа продукта | Rollup</title>
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link href="../static/css/style1.css" th:href="@{/css/style1.css}" rel="stylesheet"/>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+        <div class="pageStyle">
+            <div th:replace="fragments/menu1.html"></div>
+            <h4>Редактирование типов продуктов</h4>
+
+            <div th:if="${editFoodTypeList.empty}">
+                Нет типов продуктов для редактирования
+            </div>
+
+            <div th:if="${!editFoodTypeList.empty}">
+                <form action="/admin/editFoodType/" th:object="${editFoodType}" method="post">
+                    ID типа продукта<br>
+
+                    <select th:field="*{id}" th:width="150px">
+                        <option th:each="item : ${editFoodTypeList}" th:value="${item.getId()}"
+                                th:text="@{${item.id} + ', ' + ${item.name}}">
+                        </option>
+                    </select>
+                    <br>
+
+                    <!--input type="text" th:field="*{id}" /--><br/>
+                    Название типа продукта<br>
+                    <input type="text" th:field="*{name}"/>
+                    <br/>
+                    <br/>
+                    <input class="btn btn-primary" type="submit" value="Сохранить">
+                </form>
+            </div>
+        </div>
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

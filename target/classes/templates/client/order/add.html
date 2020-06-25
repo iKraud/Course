@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+    <!--<head th:replace="inc/head.inc::head"></head>-->
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
+
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+        <!--    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>-->
+        <script src="/js/vendor/jquery-1.12.0.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/jquery-ui.min.js"></script>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsClient :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsClient :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <div class="collapse_area coll2">
+            <div class="container">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/client/foods">Вернуться в Меню</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <form th:object="${order}" method="post" enctype="multipart/form-data">
+                            <div class="form-group mx-sm-3 mb-2">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Изображение</th>
+                                        <th>Название блюда</th>
+                                        <th>Количество</th>
+                                        <th>Цена</th>
+                                        <th>Стоимость</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="orderDetail, stat  : *{orderDetails}" th:id="${orderDetail.food.id} "
+                                        class="orderDetail">
+                                        <td>
+                                            <input hidden type="text" th:field="*{orderDetails[__${stat.index}__].food.id}"/>
+                                            <img th:src="@{'/images/' + ${orderDetail.food.image}}" width="75" height="50"/>
+                                        </td>
+                                        <td>
+                                            <span class="text" th:utext="${orderDetail.food.name}"></span>
+                                        </td>
+                                        <td>
+                                            <input th:field="*{orderDetails[__${stat.index}__].quantity}"
+                                                   th:id="'quant_'+${orderDetail.food.id}"
+                                                   type="number" name="quantity" min="1"/>
+                                        </td>
+                                        <td>
+                                        <span th:text="${orderDetail.food.price} + ' Р'"
+                                              class="price"
+                                              th:data="${orderDetail.food.price}"
+                                              th:id="'price_'+${orderDetail.food.id}"></span>
+                                        </td>
+                                        <td>
+                                            <label class="orderDetail-result" th:id="'result_'+ ${orderDetail.food.id}"
+                                                   text="item_price"> p.</label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group mx-sm-3 mb-2">
+                                                <button type="button" class="close orderDetailDeleteBtn" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label> ИТОГО: </label>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label class="count" id="order-cost"> p.</label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!--                <div class="form-group mx-sm-3 mb-2">-->
+                            <!--                    Id клиента:-->
+                            <!--                    <input type="number" th:field="*{userId}" placeholder="Id клиента" required="required"-->
+                            <!--                           class="form-control" min="1"/>-->
+                            <!--                </div>-->
+
+                            <!--                <div class="form-group mx-sm-3 mb-2">-->
+                            <!--                    Статус заказа:-->
+                            <!--                    <input type="number" th:field="*{orderStatusId}" placeholder="Статус заказа" required="required"-->
+                            <!--                           class="form-control" min="1" max="2"/>-->
+                            <!--                </div>-->
+
+                            <div class="form-group mx-sm-3 mb-2">
+                                Количество персон:
+                                <input type="number" th:field="*{persons}" placeholder="Количество персон" required="required"
+                                       class="form-control" min="1"/>
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                Примечания к заказу:
+                                <input type="text" th:field="*{notes}" placeholder="Примечания к заказу" class="form-control"/>
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                Время готовности заказа:
+                                <input type="datetime-local" th:field="*{finishedAt}" name="finishedAt" id="finishedAt"
+                                       required="required" class="form-control"/>
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                Адрес доставки:
+                                <input type="text" th:field="*{address}" placeholder="Адрес доставки" required="required"
+                                       class="form-control"/>
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                Способ оплаты:
+                                <select th:field="*{paymentId}" required="required" class="form-control">
+                                    <option value="1">Наличный</option>
+                                    <option value="2">Безналичный</option>
+                                </select>
+                            </div>
+                            <div class="buttons clearfix">
+                                <div class="pull-left">
+                                    <a class="btn btn-default ce5" href="/client/foods">Отмена</a>
+                                </div>
+                                <div class="pull-right">
+                                    <input class="btn btn-primary ce5" type="submit" value="Оформить">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <!--<div class="container">
+            <div class="btn-default">
+                <a class="btn btn-link" href="/client/foods">Перейти в Меню</a>
+                &lt;!&ndash;                        <button type="submit" class="btn btn-primary submit">Вернуться в Меню</button>&ndash;&gt;
+            </div>
+
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h1>Оформление заказа</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bs-docs-section">
+
+                <div class="row">
+                    <form th:object="${order}" method="post" enctype="multipart/form-data">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Изображение</th>
+                                    <th>Название блюда</th>
+                                    <th>Количество</th>
+                                    <th>Цена</th>
+                                    <th>Стоимость</th>
+                                    <th>Удаление</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="orderDetail, stat  : *{orderDetails}" th:id="${orderDetail.food.id} "
+                                    class="orderDetail">
+                                    <td>
+                                        <input hidden type="text" th:field="*{orderDetails[__${stat.index}__].food.id}"/>
+                                        <img th:src="@{'/images/' + ${orderDetail.food.image}}" width="75" height="50"/>
+                                    </td>
+                                    <td>
+                                        <span class="text" th:utext="${orderDetail.food.name}"></span>
+                                    </td>
+                                    <td>
+                                        <input th:field="*{orderDetails[__${stat.index}__].quantity}"
+                                               th:id="'quant_'+${orderDetail.food.id}"
+                                               type="number" name="quantity" min="1"/>
+                                    </td>
+                                    <td>
+                                        <span th:text="${orderDetail.food.price} + ' Р'"
+                                              class="price"
+                                              th:data="${orderDetail.food.price}"
+                                              th:id="'price_'+${orderDetail.food.id}"></span>
+                                    </td>
+                                    <td>
+                                        <label class="orderDetail-result" th:id="'result_'+ ${orderDetail.food.id}"
+                                               text="item_price"> p.</label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <button type="button" class="close orderDetailDeleteBtn" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label> ИТОГО: </label>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <label class="count" id="order-cost"> p.</label>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        &lt;!&ndash;                <div class="form-group mx-sm-3 mb-2">&ndash;&gt;
+                        &lt;!&ndash;                    Id клиента:&ndash;&gt;
+                        &lt;!&ndash;                    <input type="number" th:field="*{userId}" placeholder="Id клиента" required="required"&ndash;&gt;
+                        &lt;!&ndash;                           class="form-control" min="1"/>&ndash;&gt;
+                        &lt;!&ndash;                </div>&ndash;&gt;
+
+                        &lt;!&ndash;                <div class="form-group mx-sm-3 mb-2">&ndash;&gt;
+                        &lt;!&ndash;                    Статус заказа:&ndash;&gt;
+                        &lt;!&ndash;                    <input type="number" th:field="*{orderStatusId}" placeholder="Статус заказа" required="required"&ndash;&gt;
+                        &lt;!&ndash;                           class="form-control" min="1" max="2"/>&ndash;&gt;
+                        &lt;!&ndash;                </div>&ndash;&gt;
+
+                        <div class="form-group mx-sm-3 mb-2">
+                            Количество персон:
+                            <input type="number" th:field="*{persons}" placeholder="Количество персон" required="required"
+                                   class="form-control" min="1"/>
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            Примечания к заказу:
+                            <input type="text" th:field="*{notes}" placeholder="Примечания к заказу" class="form-control"/>
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            Время готовности заказа:
+                            <input type="datetime-local" th:field="*{finishedAt}" name="finishedAt" id="finishedAt"
+                                   required="required" class="form-control"/>
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            Адрес доставки:
+                            <input type="text" th:field="*{address}" placeholder="Адрес доставки" required="required"
+                                   class="form-control"/>
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            Способ оплаты:
+                            <select th:field="*{paymentId}" required="required" class="form-control">
+                                <option value="1">Наличный</option>
+                                <option value="2">Безналичный</option>
+                            </select>
+                        </div>
+                        &lt;!&ndash;<div class="form-group mx-sm-3 mb-2">
+                            <button type="submit" class="btn btn-primary submit">Оформить</button>
+                        </div>&ndash;&gt;
+                    </form>
+                </div>
+                &lt;!&ndash; /.row &ndash;&gt;
+            </div>
+            &lt;!&ndash; /.bs-docs-section &ndash;&gt;
+        </div>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsClient :: footer}"></div>
+        <!-- Footer and JS Including END -->
+
+        <script type="text/javascript">
+            var calcCost = function () {
+                var total_price = 0;
+                var item_price = 0;
+                $('.orderDetail').each(function () {
+                    var id = $(this).attr("id");
+                    var val = $('#quant_' + id).val();
+                    if (val !== undefined) {
+                        var price = $('#price_' + id).attr("data");
+                        item_price = val * price;
+                        $('#result_' + id).html(item_price + ' p.');
+                        total_price = total_price + item_price;
+                    }
+                });
+                return total_price;
+            };
+
+            function zeroPadded(val) {
+                if (val >= 10)
+                    return val;
+                else
+                    return '0' + val;
+            }
+
+            $(document).ready(function () {
+                $('#order-cost').html(calcCost() + " р.");
+
+                $(document).on("click", ".orderDetailDeleteBtn", function () {
+                    $(this).parent().parent().parent().empty();
+                    $('#order-cost').html(calcCost() + " р.");
+                });
+
+                $(document).change(function () {
+                    $('#order-cost').html(calcCost() + " p.")
+                });
+
+                // $('#finishedAt').val(d.getFullYear() + "-" + zeroPadded(d.getMonth() + 1) + "-" + zeroPadded(d.getDate()) + "T" + d.getHours() + ":" + zeroPadded(d.getMinutes()+15));
+
+                var finished = (Math.floor((new Date() * 60000 / 60000) + (210 * 60 * 1000))).toString().substring(0, 17);// 60seconds * 1000milliseconds
+                $('#finishedAt').prop('valueAsNumber', finished);
+
+                // var now = new Date();
+                // $('#finishedAt').html(new Date((now.getTime() - now.getTimezoneOffset() * 60000) + 30 * 60 * 1000).toISOString().substring(0, 19));
+
+                d = new Date();
+                $('#theDate').val(d.getFullYear() + "-"
+                    + zeroPadded(d.getMonth() + 1) + "-"
+                    + zeroPadded(d.getDate()) + "T"
+                    + d.getHours() + ":"
+                    + zeroPadded(d.getMinutes()));
+            });
+        </script>
+    </body>
+</html>

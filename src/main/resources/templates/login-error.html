@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <meta charset="UTF-8" />
+        <title>Ошибка входа в личный кабинет | Rollup</title>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsUser :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+
+        <link rel="stylesheet" href="css/main.css" th:href="@{/static/css/main.css}"/>
+    </head>
+    <body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsUser :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>
+        <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+        <a href="index.html" th:href="@{/templates/index.html}">Back to Home Page</a>
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsUser :: footer}"></div>
+        <!-- Footer and JS Including END -->
+
+    </body>
+</html>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="708" author="sharafanoksana">
+
+        <createTable tableName="role">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <insert tableName="role">
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+        <insert tableName="role">
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true" startWith="2">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)"/>
+            <column name="phone" type="varchar(11)">
+                <constraints unique="true"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints unique="true"/>
+            </column>
+        </createTable>
+
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="email" value="admin@admin.com"/>
+            <column name="phone" value="87777777777"/>
+            <!-- pass: admin -->
+            <column name="password" value="$2a$10$C1E0v2WX6n/EaLmXiCcrQupbmnY5Tms3pAqKjzoOANqoo1dlOQnxm"/>
+        </insert>
+
+        <createTable tableName="users_roles">
+            <column name="user_id" type="int">
+                <constraints nullable="true" foreignKeyName="fk_users_id" references="users(id)"/>
+            </column>
+            <column name="roles_id" type="int">
+                <constraints nullable="true" foreignKeyName="fk_role_id" references="role(id)"/>
+            </column>
+        </createTable>
+
+        <insert tableName="users_roles">
+            <column name="user_id" valueComputed="(SELECT id FROM users WHERE username='admin')"/>
+            <column name="roles_id" valueComputed="(SELECT id FROM role WHERE name='ROLE_ADMIN')"/>
+        </insert>
+
+
+
+        <createTable tableName="menu">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="food_type">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="food">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="food_type_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_food_type_id" references="food_type(id)"/>
+            </column>
+            <column name="description" type="varchar(250)"/>
+            <column name="weight" type="numeric(4,2)"/>
+            <column name="price" type="numeric(4,2)"/>
+            <column name="image" type="varchar(250)"/>
+            <column name="active" type="bool"/>
+        </createTable>
+
+        <createTable tableName="food_menu">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="food_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_food_id" references="food(id)"/>
+            </column>
+            <column name="menu_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_menu_id" references="menu(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="order_status">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <insert tableName="order_status">
+            <column name="name" value="Холодные"/>
+        </insert>
+        <insert tableName="order_status">
+            <column name="name" value="Теплые"/>
+        </insert>
+        <insert tableName="order_status">
+            <column name="name" value="Сеты"/>
+        </insert>
+
+        <createTable tableName="orders">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"/>
+            </column>
+            <column name="created_at" type="timestamp"/>
+            <column name="finished_at" type="timestamp"/>
+            <column name="order_status_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_order_status_id" references="order_status(id)"/>
+            </column>
+            <column name="note" type="varchar(250)"/>
+            <column name="address" type="varchar(250)"/>
+            <column name="persons" type="int"/>
+        </createTable>
+
+        <createTable tableName="order_detail">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_order_id" references="orders(id)"/>
+            </column>
+            <column name="food_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_food_id" references="food(id)"/>
+            </column>
+            <column name="quantity" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

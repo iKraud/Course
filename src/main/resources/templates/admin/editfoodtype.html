@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <!-- FRAGMENT # 1: Service Information (without Title) -->
+        <!-- Service Information (Head Block) Without Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) Without Title END -->
+
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <section class="collapse_area coll2">
+            <div class="container">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/admin/getfoodtypeslist">Перечень категорий</a>
+                        <a class="blog7" href="/admin/addfoodtype">Добавить категорию</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <!--<a href="/admin/listmenu">Перечень категорий</a>
+                        <br/>-->
+
+                        <!--<h2>Редактирование категории продуктов</h2>-->
+                        <form th:action="@{'/admin/editfoodtype/' + ${id}}" th:object="${editfoodtype}" method="post">
+
+                            <h5>Новое наименование категории:</h5>
+                            <input type="text" th:field="*{name}" />
+                            <br/>
+                            <br/>
+                            <div class="buttons clearfix">
+                                <div class="pull-left">
+                                    <a class="btn btn-default ce5" href="/admin/getfoodtypeslist">Отмена</a>
+                                </div>
+                                <div class="pull-right">
+                                    <input class="btn btn-primary ce5" type="submit" value="Сохранить изменения" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br/>
+        <br/>
+
+        <!--<div class="pageStyle">
+            &lt;!&ndash;<a href="/admin/listmenu"> Перечень меню </a>
+            <br/>&ndash;&gt;
+            <h4>Редактирование категории продуктов</h4>
+            <div th:if="${getfoodtypeslist.isEmpty()}">
+                Нет категорий продуктов для редактирования
+            </div>
+            <div th:if="${!getfoodtypeslist.isEmpty()}">
+                <form action="/admin/editfoodtype" th:object="${editfoodtype}" method="post">
+                    &lt;!&ndash;
+                    ID категории продукта:<br/>
+                    <select th:field="*{id}" th:width="150px">
+                        <option th:each="item : ${getfoodtypeslist}" th:value="${item.getId()}" th:text="@{${item.id} + ', ' + ${item.name}}">
+                        </option>
+                    </select>
+                    <br/>
+                    &ndash;&gt;
+                    Название категории продукта:<br/>
+                    <input type="text" th:field="*{name}" placeholder="Название категории продукта"/>
+                    <br/>
+                    <br/>
+                    <input class="btn btn-primary" type="submit" value="Сохранить" />
+                </form>
+            </div>
+        </div>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<body>
+<!----->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="navbar-brand " href="/">Суши и роллы в Иннополисе</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/">Меню</a>
+            </li>
+        </ul>
+        <span class="form-inline my-2 my-lg-0">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" sec:authentication="name"></a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" th:href="@{/logout}">Выход</a>
+                    </li>
+                    <li class="nav-item">
+                        <span sec:authorize="isAnonymous()">
+                            <a class="nav-link" th:href="@{/registration/}">Регистрация</a>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <span sec:authorize="isAnonymous()">
+                            <a class="nav-link" th:href="@{/login/}">Вход</a>
+                        </span>
+                    </li>
+                </ul>
+            </span>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;"
+     sec:authorize="isAuthenticated()">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo04">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/public/listFoodType/">Смотреть список типов продуктов</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/addFoodType/">Добавить тип продукта</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/editFoodType/">Редактировать тип продукта</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

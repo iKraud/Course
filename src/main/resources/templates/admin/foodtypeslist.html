@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <!-- FRAGMENT # 1: Service Information (without Title) -->
+        <!-- Service Information (Head Block) Without Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) Without Title END -->
+
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <!--<div class="shopping-cart-area nr-wish-area">-->
+        <div class="collapse_area coll2">
+            <div class="container">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/admin/getfoodtypeslist">Перечень категорий</a>
+                        <a class="blog7" href="/admin/addfoodtype">Добавить категорию</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="s-cart-all">
+                            <div class="cart-form table-responsive">
+                                <table id="shopping-cart-table" class="data-table cart-table">
+                                    <tbody>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th class="low2">Наименование</th>
+                                        <th class="low5">Редактировать</th>
+                                        <th class="low1">Удаление</th>
+                                    </tr>
+                                    <tr th:if="${getfoodtypeslist.isEmpty()}">
+                                        <td colspan="5"> Нет категорий для отображения </td>
+                                    </tr>
+                                    <tr th:each="item : ${getfoodtypeslist}">
+                                        <td class="sop-cart">
+                                            <span th:text="${item.getId()}"></span>
+                                            <!--<a href="#"><img class="primary-image" alt="" src="img/products/10.jpg"></a>-->
+                                        </td>
+                                        <td class="sop-cart an-sh">
+                                            <div class="tb-beg">
+                                                <b th:text="${item.getName()}"> </b>
+                                                <!--<a href="#">Vintage Shoe</a>-->
+                                            </div>
+                                        </td>
+                                        <td class="sop-cart an-sh">
+                                            <!--<div class="tb-beg">-->
+                                            <a th:href="'/admin/editfoodtype/' + ${item.getId()}"> Редактировать </a>
+                                            <!--</div>-->
+                                        </td>
+                                        <!--<td class="sop-cart">
+                                            <div class="tb-product-price font-noraure-3">
+                                                <span class="amount">$180.00</span>
+                                            </div>
+                                        </td>-->
+                                        <!--<td class="sop-cart">
+                                            <div class="last-cart l-mrgn wish">
+                                                <a class="las4" href="#"> Add to Cart</a>
+                                            </div>
+                                        </td>-->
+                                        <!--<td class="cen">-->
+                                        <td class="sop-icon1">
+                                            <a th:href="'/admin/deletefoodtype/' + ${item.getId()}">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <!--<div class="pageStyle">
+            &lt;!&ndash; <h4> Список категорий продуктов</h4> &ndash;&gt;
+            <a href="/admin/addfoodtype"> Добавить категорию </a>
+            <br/>
+
+            <table width="100%" class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"> ID </th>
+                        <th scope="col"> Название </th>
+                        <th scope="col"> Редактировать </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${getfoodtypeslist.isEmpty()}">
+                        <td colspan="2">Нет категорий продуктов для отображения</td>
+                    </tr>
+                    <tr th:each="item : ${getfoodtypeslist}">
+                        <td scope="row">
+                            <span th:text="${item.getId()}"> </span>
+                        </td>
+                        <td>
+                            <span th:text="${item.getName()}"> </span>
+                        </td>
+                        <td>
+                            <a th:href="'/admin/editfoodtype/' + ${item.getId()}"> Редактировать </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: footer}"></div>
+        <!-- Footer and JS Including END -->
+
+    </body>
+</html>

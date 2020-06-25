@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+    <!--<head th:replace="inc/head.inc::head"></head>-->
+    <head>
+        <meta charset="UTF-8">
+        <title>List food | Rollup</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsClient :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsClient :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <!--&lt;!&ndash; Navigation &ndash;&gt;-->
+        <!--<div th:replace="inc/top_nav.inc::top_nav"></div>-->
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h1>Блюда</h1>
+                    </div>
+                </div>
+            </div>
+            <!--/.page-header-->
+
+            <div class="bs-docs-section">
+                    <div class="row" th:each="food, iterator : ${foods}" >
+                        <div class="col-lg-12">
+                            <a th:href="@{'/food/' + ${food.id} + '/'}"
+                               th:text="${item.active}?'true'"
+                               th:text="${food.name}"
+                               th:text="${item.foodTypeId}"
+                               th:text="${item.description}"
+                               th:text="${item.weight}"
+                               th:text="${item.price}"
+                               th:text="${item.image}">
+                            </a>
+                        </div>
+                    </div>
+                    <!--             /.row -->
+            </div>
+            <!-- /.bs-docs-section -->
+
+        </div>
+        <!-- /.container -->
+
+        <!--&lt;!&ndash; Footer &ndash;&gt;-->
+        <!--<footer th:include="inc/footer.inc::footer"></footer>-->
+
+        <!--&lt;!&ndash; Bootstrap core JavaScript &ndash;&gt;-->
+        <!--<div th:replace="inc/js.inc::js"></div>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsClient :: footer}"></div>
+        <!-- Footer and JS Including END -->
+
+    </body>
+</html>

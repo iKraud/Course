@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <title>Главная | Rollup</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <style type="text/css">
+            .pageStyle {
+                font-family: Tahoma;
+                font-size: 10pt;
+                margin-top: 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    </head>
+    <body>
+        <div class="pageStyle">
+            <div th:replace="fragments/menu1.html"></div>
+            <h4>Начальная страница сайта</h4><br/>
+            <h4>
+                <div sec:authorize="hasRole('ROLE_USER')">Текст для пользователей с ролью USER</div>
+            </h4>
+            <h4>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">Текст для пользователей с ролью ADMIN</div>
+            </h4>
+        </div>
+    </body>
+</html>

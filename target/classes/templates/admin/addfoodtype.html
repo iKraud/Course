@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <!-- FRAGMENT # 1: Service Information (without Title) -->
+        <!-- Service Information (Head Block) Without Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) Without Title END -->
+
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <!-- add food type section start -->
+        <section class="collapse_area coll2">
+            <div class="container">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/admin/getfoodtypeslist">Перечень категорий</a>
+                        <a class="blog7" href="/admin/addfoodtype">Добавить категорию</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <!--<div class="check">
+                            <h2>Добавление категории</h2>
+                        </div>-->
+                        <div class="faq-accordion">
+                            <div class="panel-group pas7" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed method" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Добавить категорию<i class="fa fa-caret-down"></i></a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" >
+                                        <div class="row">
+                                            <div class="easy2">
+                                                <h2>Информация о категории</h2>
+                                                <!--<a href="/admin/listmenu">Перечень меню</a>-->
+                                                <br />
+                                                <form class="form-horizontal" action="/admin/addfoodtype" th:object="${addfoodtype}" method="post">
+                                                    <fieldset>
+                                                        <div class="form-group required">
+                                                            <label class="col-sm-2 control-label">Наименование</label>
+                                                            <div class="col-sm-10">
+                                                                <input class="form-control" type="text" th:field="*{name}" placeholder="Наименование категории" />
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                    <div class="buttons clearfix">
+                                                        <div class="pull-left">
+                                                            <a class="btn btn-default ce5" href="/admin/getfoodtypeslist">Отмена</a>
+                                                        </div>
+                                                        <div class="pull-right">
+                                                            <input class="btn btn-primary ce5" type="submit" value="Добавить">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- add food type section end -->
+        <br />
+        <br />
+
+        <!--<div class="pageStyle">
+            &lt;!&ndash;<a href="/admin/listmenu"> Перечень меню </a>
+            <br/>&ndash;&gt;
+            &lt;!&ndash; <h4> Добавление новой категории продуктов</h4>&ndash;&gt;
+            <a href="/admin/getfoodtypeslist"> Перечень категорий </a>
+            <br/>
+            <form action="/admin/addfoodtype" th:object="${addfoodtype}" method="post">
+                <div class="form-group mx-sm-3 mb-2">
+                    Тип продукта:
+                    <input type="text" th:field="*{name}"/>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Добавить">
+            </form>
+        </div>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <meta charset="utf-8" />
+        <title>Регистрация успешно завершена | Rollup</title>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsUser :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <style type="text/css">
+            .pageStyle {
+                font-family: Tahoma;
+                font-size: 10pt;
+                margin-top: 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsUser :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <div class="pageStyle">
+            <div th:replace="fragments/menu1.html"></div>
+            <div class="alert alert-success" role="alert">
+                Вы успешно зарегистрированы в системе! <br/>
+                Авторизуйтесь на сайте.
+            </div>
+        </div>
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsUser :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

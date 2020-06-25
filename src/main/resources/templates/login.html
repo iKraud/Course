@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <meta charset="UTF-8" />
+        <title>Вход в личный кабинет | Rollup</title>
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+
+        <!-- FRAGMENT # 1: Service Information (without Title) -->
+        <!-- Service Information (Head Block) Without Title START -->
+        <div th:replace="~{fragments/commonPartsUser :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) Without Title END -->
+
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsUser :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <div class="login-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="tb-login-form ">
+                            <h5 class="tb-title">Вход на сайт</h5>
+                            <p class="alert alert-danger" role="alert" th:if="${loginError}">
+                                Неверные имя пользователя или пароль
+                            </p>
+                            <form th:action="@{/login/}" method="post">
+                                <p class="checkout-coupon top log a-an">
+                                    <label class="l-contact" for="username">Имя пользователя <em>*</em></label><br/>
+                                    <input type="text" class="form-control" id="username" name="username" autofocus="autofocus" placeholder="Имя пользователя"/>
+                                </p>
+                                <p class="checkout-coupon top-down log a-an">
+                                    <label class="l-contact" for="password">Пароль <em>*</em></label><br/>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Пароль"/>
+                                </p>
+                                <div class="forgot-password1">
+                                    <label class="inline2">
+                                        <input type="checkbox" id="remember-me" name="remember-me">
+                                        Запомнить меня!
+                                    </label>
+                                    <!--<a class="forgot-password" href="#">Forgot Your password?</a>-->
+                                </div>
+                                <p class="login-submit5">
+                                    <input class="button-primary" type="submit" value="Войти">
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="pageStyle">
+            <div th:replace="fragments/menu1.html"></div>
+            <div class="container bgcont center-block">
+                <div class="row background-row">
+                    <div class="centered-top col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                        <h4>Вход на сайт</h4>
+                        <p class="alert alert-danger" role="alert" th:if="${loginError}">
+                            Неверные имя пользователя или пароль
+                        </p>
+                        <form th:action="@{/login/}" method="post">
+                            <div class="form-group ">
+                                <label for="username">Имя пользователя</label><br/>
+                                <input type="text" class="form-control" id="username" name="username" autofocus="autofocus"
+                                       placeholder="Имя пользователя"/> <br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Пароль</label><br/>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Пароль"/>
+                                <br/>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="remember-me" name="remember-me" />
+                                <label for="remember-me">Запомнить меня</label>
+                            </div>
+
+                            <input type="submit" class="btn btn-primary btn btn-lg btn-block" value="Войти"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <br />
+        <br />
+        <br />
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsUser :: footer}"></div>
+        <!-- Footer and JS Including END -->
+
+    </body>
+</html>

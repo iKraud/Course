@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+    <!--<head th:replace="inc/head.inc::head"></head>-->
+    <head>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+        <script src="/js/vendor/jquery-1.12.0.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/jquery-ui.min.js"></script>
+
+        <!-- FRAGMENT # 1: Service Information (without Title) -->
+        <!-- Service Information (Head Block) Without Title START -->
+        <div th:replace="~{fragments/commonPartsClient :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) Without Title END -->
+    </head>
+    <body>
+
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsClient :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <!--&lt;!&ndash; Navigation &ndash;&gt;-->
+        <!--<div th:replace="inc/top_nav.inc::top_nav"></div>-->
+
+        <!--<div>
+            <a href="/client/order/add" class="btn btn-success" th:text="'Корзина: '+${cnt}"></a>
+        </div>-->
+
+        <div class="container">
+
+            <div class="blog-area">
+                <div class="tb-content7">
+                    <a class="blog7" href="/client/order/add" th:text="'Корзина: '+${cnt}"></a>
+                </div>
+            </div>
+
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h1>Роллы</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div th:each="food, iterator : ${foods}">
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <img th:src="@{'/images/' + ${food.image}}" width="300" height="200"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <h3 class="text" th:text="${food.name}"></h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <span th:text="${food.description}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    Вес:
+                                    <span th:text="${food.weight} + ' гр'"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <span th:text="'Цена: '+ ${food.price} + ' Р'"/>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    Кол-во:
+                                    <input name="quantity" type="number" value="1" height="30"/>
+                                    <input name="id" type="hidden" th:value="${food.id}"/>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <!--<div>
+                                        <input type="submit" value="Выбрать" class="btn btn-success"/>
+                                    </div>-->
+                                    <div class="buttons clearfix">
+                                        <!--<div class="pull-left">
+                                            <a class="btn btn-default ce5" href="/admin/listmenu">Отмена</a>
+                                        </div>-->
+                                        <div class="pull-left">
+                                            <input class="btn btn-primary ce5" type="submit" value="Выбрать">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="row">
+                <div th:each="food, iterator : ${foods}">
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <form method="post">
+                            <div>
+                                <img th:src="@{'/images/' + ${food.image}}" width="300" height="200"/>
+                            </div>
+                            <div>
+                                <h3 class="text" th:text="${food.name}"></h3>
+                            </div>
+                            <div>
+                                <span th:text="${food.description}"></span>
+                            </div>
+                            <div>
+                                Вес:
+                                <span th:text="${food.weight} + ' гр'"></span>
+                            </div>
+                            <div>
+                                <span th:text="'Цена: '+ ${food.price} + ' Р'"/>
+                            </div>
+                            <br />
+                            <div>
+                                Кол-во:
+                                <input name="quantity" type="number" value="1" height="30"/>
+                                <input name="id" type="hidden" th:value="${food.id}"/>
+                            </div>
+                            <br />
+                            &lt;!&ndash;<div>
+                                <input type="submit" value="Выбрать" class="btn btn-success"/>
+                            </div>&ndash;&gt;
+                            <div class="buttons clearfix">
+                                &lt;!&ndash;<div class="pull-left">
+                                    <a class="btn btn-default ce5" href="/admin/listmenu">Отмена</a>
+                                </div>&ndash;&gt;
+                                <div class="pull-left">
+                                    <input class="btn btn-primary ce5" type="submit" value="Выбрать">
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                        </form>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+        <br />
+        <br />
+
+        <!--<section class="pages products-page section-padding-top">
+            <div class="container">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/client/order/add" th:text="'Корзина: '+${cnt}"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="features-tab">
+                            &lt;!&ndash; Tab panes &ndash;&gt;
+                            <h1>Роллы</h1>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                    <div class="row">
+                                        <div class="shop-tab">
+                                            <div th:each="food, iterator : ${foods}">
+                                                &lt;!&ndash; single-product start &ndash;&gt;
+                                                <div class="col-md-4 col-lg-4 col-sm-6"> &lt;!&ndash;  &ndash;&gt;
+                                                    <form method="post">
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <div class="pro-type">
+                                                                    &lt;!&ndash;<span>new</span>&ndash;&gt;
+                                                                    &lt;!&ndash;<span>sale</span>&ndash;&gt;
+                                                                </div>
+                                                                <a href="#">
+                                                                    <img th:src="@{'/images/' + ${food.image}}" width="300" height="200"/> &lt;!&ndash;width="100%"&ndash;&gt;
+                                                                    &lt;!&ndash;<img src="img/products/1.jpg" alt="Product Title" />&ndash;&gt;
+                                                                    &lt;!&ndash;<img class="secondary-image" alt="Product Title" src="img/products/2.jpg">&ndash;&gt;
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-dsc">
+                                                                <h3 th:text="${food.name}"></h3>
+                                                                &lt;!&ndash;<h3 class="text" th:text="${food.name}"></h3>&ndash;&gt;
+                                                                &lt;!&ndash;<h3><a href="#">Product Title</a></h3>&ndash;&gt;
+                                                                <div class="star-price">
+                                                                    &lt;!&ndash;<span class="price-left">$52.00</span>&ndash;&gt;
+                                                                    <span th:text="'Цена: ' + ${food.price} + ' P'"></span>
+                                                                    <br />
+                                                                    <span th:text="'Описание: ' + ${food.description}"></span>
+                                                                    <br />
+                                                                    <span th:text="'Вес: ' + ${food.weight} + ' гр'"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-content">
+                                                                <label>Количество:</label>
+                                                                <div class="quantity">
+                                                                    <div class="cart-plus-minus">
+                                                                        <input value="1" name="quantity" class="cart-plus-minus-box" />
+                                                                        <input name="id" type="hidden" th:value="${food.id}"/>
+                                                                        &lt;!&ndash; <input type="text" th:name="quantity" placeholder="Количество" required="required" class="form-control"/> &ndash;&gt;
+                                                                        &lt;!&ndash; <input type="text" value="0" name="qtybutton" class="cart-plus-minus-box"/> &ndash;&gt;
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="actions-btn">
+                                                                &lt;!&ndash;<a data-toggle="tooltip" data-placement="top"><i class="fa fa-shopping-cart"><input type="submit" value="Выбрать" class="btn btn-success"/></i></a>&ndash;&gt;
+                                                                &lt;!&ndash;<a href="#" data-placement="top" data-target="#quick-view" data-trigger="hover" data-toggle="modal" data-original-title="Quick View"><i class="fa fa-eye"></i></a>&ndash;&gt;
+                                                                &lt;!&ndash;<a data-placement="top" data-toggle="tooltip" href="#" data-original-title="Add To Wishlist"><i class="fa fa-heart"></i></a>&ndash;&gt;
+                                                                &lt;!&ndash;<a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Compare"><i class="fa fa-retweet"></i></a>&ndash;&gt;
+                                                                &lt;!&ndash;<a class="btn btn-success" th:href="@{'/client/food/' + ${food.id} + '/pick/'}">Выбрать</a>&ndash;&gt;
+                                                                &lt;!&ndash;<a th:href="@{'/client/food/' + ${food.id} + '/pick'}" data-toggle="tooltip" data-placement="top" title="Добавить в корзину"><i class="fa fa-shopping-cart"></i></a>&ndash;&gt;
+                                                            </div>
+                                                            <input type="submit" value="Выбрать" class="btn btn-success"/>
+                                                        </div> &lt;!&ndash; Single Product &ndash;&gt;
+                                                    </form>
+                                                </div> &lt;!&ndash; Columns &ndash;&gt;
+                                            </div> &lt;!&ndash; Перечисление &ndash;&gt;
+                                            &lt;!&ndash; single-product end &ndash;&gt;
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            &lt;!&ndash;<div class="shop-all-tab-cr shop-bottom">
+                                <div class="two-part">
+                                    <div class="shop5 page">
+                                        <ul>
+                                            <li>
+                                                <a class="active" href="#">1</a>
+                                                <a href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">5</a>
+                                                <a href="#"><i class="fa fa-arrow-right"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>&ndash;&gt;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        &lt;!&ndash; shop-style  content section end &ndash;&gt;-->
+
+        <!-- Старое - На всякий случай! -->
+        <!-- Page Content -->
+        <!--<div class="container">
+
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h1>Роллы</h1>
+                    </div>
+                </div>
+            </div>
+            &lt;!&ndash;/.page-header&ndash;&gt;
+
+            <div class="bs-docs-section">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="add-to-box">
+                            <tr th:each="food, iterator : ${foods}">
+                                <div class="goods-img">
+                                    <div class="item-tag">
+                                        <img th:src="@{'/images/' + ${food.image}}" width="300" height="200"/>
+                                    </div>
+                                </div>
+                                <div class="goods-cont">
+                                    <h1 class="text" th:text="${food.name}"></h1>
+                                    <div class="text">
+                                        <span th:text="${food.description}"></span>
+                                    </div>
+                                    <div class="text">
+                                        Вес:
+                                        <span th:text="${food.weight} + ' гр'"></span>
+                                    </div>
+                                    <div class="goods-footer">
+                                        <div class="goods-cost" style="position: relative">
+                                            <div class="text">
+                                                Цена:
+                                                <span th:text="${food.price} + ' P'"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <td>
+                                    <a class="btn btn-success" th:href="@{'/client/food/' + ${food.id} + '/pick/'}">Выбрать</a>
+                                </td>
+                            </tr>
+                        </div>
+                    </div>
+                </div>
+                &lt;!&ndash; /.row &ndash;&gt;
+            </div>
+            &lt;!&ndash; /.bs-docs-section &ndash;&gt;
+
+        </div>
+        &lt;!&ndash; /.container &ndash;&gt;-->
+
+        <!--&lt;!&ndash; Footer &ndash;&gt;-->
+        <!--<footer th:include="inc/footer.inc::footer"></footer>-->
+
+        <!--&lt;!&ndash; Bootstrap core JavaScript &ndash;&gt;-->
+        <!--<div th:replace="inc/js.inc::js"></div>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsClient :: footer}"></div>
+        <!-- Footer and JS Including END -->
+
+    </body>
+
+</html>

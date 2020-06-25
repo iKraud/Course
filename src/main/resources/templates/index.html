@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="RU"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <title>Главная | Rollup</title>
+
+        <!-- Service Information (Head Block) Without Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) Without Title END -->
+
+        <!--<div sec:if="hasRole('ROLE_ADMIN')">
+            &lt;!&ndash; Service Information (Head Block) Without Title START &ndash;&gt;
+            <div th:replace="~{fragments/commonPartsAdmin :: serviceInfo}"></div>
+            &lt;!&ndash; Service Information (Head Block) Without Title END &ndash;&gt;
+        </div>
+        <div sec:if="hasRole('ROLE_USER')">
+            &lt;!&ndash; Service Information (Head Block) Without Title START &ndash;&gt;
+            <div th:replace="~{fragments/commonPartsUser :: serviceInfo}"></div>
+            &lt;!&ndash; Service Information (Head Block) Without Title END &ndash;&gt;
+        </div>-->
+
+    </head>
+    <body>
+        <!-- For IE8 Block and Header START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: headerMain}"></div>
+        <!-- For IE8 Block and Header END -->
+
+        <!--<div sec:if="hasRole('ROLE_ADMIN')">
+            &lt;!&ndash; For IE8 Block and Header START &ndash;&gt;
+            <div th:replace="~{fragments/commonPartsAdmin :: headerMain}"></div>
+            &lt;!&ndash; For IE8 Block and Header END &ndash;&gt;
+        </div>
+        <div sec:if="hasRole('ROLE_USER')">
+            &lt;!&ndash; For IE8 Block and Header START &ndash;&gt;
+            <div th:replace="~{fragments/commonPartsUser :: headerMain}"></div>
+            &lt;!&ndash; For IE8 Block and Header END &ndash;&gt;
+        </div>-->
+
+        <!--<sec:authorize access="hasRole('ROLE_ADMIN')">
+            <h1>Login</h1>
+        </sec:authorize>
+        <sec:authorize access="hasRole('ROLE_USER')">
+            <h1>Logout</h1>
+        </sec:authorize>-->
+
+        <!--<div sec:authorize access="!isAuthenticated()">
+            <h1>Login</h1>
+        </div>
+        <div sec:authorize access="isAuthenticated()">
+            <h1>Logout</h1>
+        </div>-->
+
+        <!-- Slider Section START -->
+        <section class="slider-main-area">
+            <div class="main-slider an-si">
+                <div class="bend niceties preview-2 hm-ver-1">
+                    <div id="ensign-nivoslider-2" class="slides">	
+                        <img th:src="@{/img/slider/1.png}" alt="" title="#slider-direction-1"  />
+                        <!-- <img src="img/slider/1.png" alt="" title="#slider-direction-1"  /> -->
+                        <img th:src="@{/img/slider/2.png}" alt="" title="#slider-direction-2"  />
+                        <!-- <img src="img/slider/2.png" alt="" title="#slider-direction-1"  /> -->
+                    </div>
+                    <!-- direction 1 -->
+                    <div id="slider-direction-1" class="t-cn slider-direction Builder">
+                        <div class="slide-all">
+                            <!-- layer 1 -->
+                            <div class="layer-1">
+                                <h2 class="title5">Роллы</h2>
+                            </div>
+                            <!-- layer 2 -->
+                            <div class="layer-2">
+                                <h2 class="title6">Калифорния</h2>
+                            </div>
+                            <!-- layer 2 -->
+                            <div class="layer-2">
+                                <p class="title0">Скидка 10%</p>
+                            </div>
+                            <!-- layer 3 -->
+                            <div class="layer-3">
+                                <a class="min1" href="/client/foods">Заказать</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="slider-direction-2" class="t-cn slider-direction Builder">
+                        <div class="slide-all slide2">
+                            <!-- layer 1 -->
+                            <div class="layer-1">
+                                <h2 class="title5">Роллы</h2>
+                            </div>
+                            <!-- layer 2 -->
+                            <div class="layer-2">
+                                <h2 class="title6">Филадельфия</h2>
+                            </div>
+                            <!-- layer 2 -->
+                            <div class="layer-2">
+                                <p class="title0">Скидка 20%</p>
+                            </div>
+                            <!-- layer 3 -->
+                            <div class="layer-3">
+                                <a class="min1" href="/client/foods">Заказать</a>
+                            </div>
+                        </div>
+                    </div>
+			    </div>
+            </div>
+        </section>
+		<!-- Slider Section END -->
+
+        <!-- Alexey's Part START -->
+        <!--
+        <div class="container">
+            <br />
+            <h4>
+                <div sec:authorize="hasRole('ROLE_USER')">Текст для пользователей с ролью USER</div>
+            </h4>
+            <h4>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">Текст для пользователей с ролью ADMIN</div>
+            </h4>
+        </div>
+        -->
+        <!-- Alexey's Part END -->
+
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: footer}"></div>
+        <!-- Footer and JS Including END -->
+
+        <!--<div sec:if="hasRole('ROLE_ADMIN')">
+            &lt;!&ndash; Footer and JS Including START &ndash;&gt;
+            <div th:replace="~{fragments/commonPartsAdmin :: footer}"></div>
+            &lt;!&ndash; Footer and JS Including END &ndash;&gt;
+        </div>
+        <div sec:if="hasRole('ROLE_USER')">
+            &lt;!&ndash; Footer and JS Including START &ndash;&gt;
+            <div th:replace="~{fragments/commonPartsUser :: footer}"></div>
+            &lt;!&ndash; Footer and JS Including END &ndash;&gt;
+        </div>-->
+	</body>
+</html>

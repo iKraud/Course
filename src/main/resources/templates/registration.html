@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <meta charset="utf-8" />
+        <title>Регистрация | Rollup</title>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsUser :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <style type="text/css">
+            .pageStyle {
+                font-family: Tahoma;
+                font-size: 10pt;
+                margin-top: 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsUser :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <div class="pageStyle">
+            <div th:replace="fragments/menu1.html"></div>
+
+            <div class="container bgcont center-block">
+                <div class="row background-row">
+                    <div class="centered-top col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                        <h4>Регистрация пользователя</h4>
+                        <p class="alert alert-danger" role="alert" th:if="${regError}">
+                            <span th:text="${regError}"></span>
+                        </p>
+                        <form action="/registration" th:object="${userForm}" method="POST" enctype="utf8">
+                            <div class="form-group ">
+                                Имя пользователя<br/>
+                                <input type="text"class="form-control"   placeholder="Имя пользователя" th:field="*{username}"/>
+                            </div>
+                            <div class="form-group ">
+                                Телефон<br/>
+                                <input type="tel" class="form-control"  value="75555555555" id="example-tel-input"  placeholder="Телефон" th:field="*{phone}"/>
+                            </div>
+                            <div class="form-group ">
+                                Электронная почта<br/>
+                                <input type="email" class="form-control"  id="exampleInputEmail1" placeholder="Электронная почта" th:field="*{email}"/>
+                            </div>
+                            <div class="form-group ">
+                                Пароль<br/>
+                                <input type="password" class="form-control"  placeholder="Пароль" th:field="*{password}"/>
+                            </div>
+                            <div class="form-group ">
+                                Подтврдите пароль<br/>
+                                <input type="password" class="form-control"  placeholder="Подтверждение пароля" th:field="*{passwordConfirm}"/>
+                            </div>
+                            <input class="btn btn-primary btn btn-lg btn-block" type="submit" value="Зарегистрироваться">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsUser :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

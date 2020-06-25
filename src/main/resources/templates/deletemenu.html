@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <meta charset="UTF-8" />
+        <title>Удаление меню | Rollup</title>
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link href="../static/css/style1.css" th:href="@{/static/css/style1.css}" rel="stylesheet"/>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <section class="collapse_area coll2">
+            <div class="container">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/admin/listmenu">Перечень Меню</a>
+                        <a class="blog7" href="/admin/addmenu">Добавить Меню</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <!--<a href="/admin/listmenu">Перечень меню</a>
+                        <br/>-->
+
+                        <!--<h2>Удаление меню</h2>-->
+                        <form th:action="@{'/admin/deletemenu/' + ${id}}" th:object="${menu}" method="post">
+
+                            <h5>Наименование меню на удаление:</h5>
+                            <h3><span th:text="${menu.title}"></span></h3>
+                            <br/>
+                            <br/>
+                            <div class="buttons clearfix">
+                                <div class="pull-left">
+                                    <a class="btn btn-default ce5" href="/admin/listmenu">Отмена</a>
+                                </div>
+                                <div class="pull-right">
+                                    <input class="btn btn-primary ce5" type="submit" value="Подтвердить удаление" />
+                                </div>
+                            </div>
+                            <!--<div class="btn btn-primary mb-2">
+                                <input class="btn btn-primary" type="submit" value="Подтвердить удаление" />
+                            </div>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br/>
+        <br/>
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

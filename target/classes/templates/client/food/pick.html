@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+    <!--<head th:replace="inc/head.inc::head"></head>-->
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+        <script src="/js/vendor/jquery-1.12.0.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/jquery-ui.min.js"></script>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) Without Title START -->
+        <div th:replace="~{fragments/commonPartsClient :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) Without Title END -->
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsClient :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <section class="single-product-area sit">
+            <div class="container">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/client/foods">Вернуться в Меню</a>
+                    </div>
+                </div>
+                <h2>Просмотр блюда</h2>
+                <div class="row">
+                    <form th:object="${food}" method="post">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 none-si-pro">
+                                    <div class="pro-img-tab-content tab-content">
+                                        <div class="tab-pane active"> <!-- id="image-1"> -->
+                                            <div class="simpleLens-big-image-container">
+                                                <a class="simpleLens-lens-image" data-lightbox="roadtrip" data-lens-image="img/products/12.jpg" href="img/products/12.jpg">
+                                                    <img th:src="@{'/images/' + ${food.image}}" width="400" height="300"/>
+                                                    <!-- <img src="img/products/12.jpg" alt="" class="simpleLens-big-image" /> -->
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="cras">
+                                        <div class="product-name">
+                                            <h1 class="text" th:text="${food.name}"></h1>
+                                            <!-- <h2>Ut wisi enim</h2> -->
+                                        </div>
+                                        <!--<p class="availability in-stock">
+                                            Product Code: Product 3
+                                        </p>-->
+                                        <!--<p class="availability in-stock2">
+                                            Availability:In stock
+                                        </p>-->
+                                        <div class="short-description">
+                                            <span th:text="${food.description}"></span>
+                                            <br />
+                                            <p th:text="'Вес: '+${food.weight}+' гр'"> гр</p>
+                                            <!-- <p class="text-left" th:text="'Вес: '+${food.weight}+' гр'"> гр</p> -->
+                                            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio...</p> -->
+                                        </div>
+                                        <div class="pre-box">
+                                            <h3 th:text="${food.price} + ' Р'" class="font-weight-bold"/>
+                                            <!-- <h3 th:text="'Цена: '+ ${food.price} + ' Р'" class="font-weight-bold"/> -->
+                                            <!-- <span class="special-price">$155.00</span> -->
+                                        </div>
+                                        <div class="add-to-box1">
+                                            <div class="add-to-box add-to-box2">
+                                                <div class="add-to-cart">
+                                                    <div class="input-content">
+                                                        <label>Количество:</label>
+                                                        <div class="quantity">
+                                                            <div class="cart-plus-minus">
+                                                                <input type="text" value="0" th:name="quantity" placeholder="Количество" required="required" class="cart-plus-minus-box">
+                                                                <!-- <input type="text" th:name="quantity" placeholder="Количество" required="required" class="form-control"/> -->
+                                                                <!-- <input type="text" value="0" name="qtybutton" class="cart-plus-minus-box"/> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-icon">
+                                                        <!--<a href="#">-->
+                                                            <input type="submit" value="ASDASASDASD" />
+                                                            <!-- <input type="submit" value="ASDASASDASD" /> -->
+                                                            <!-- <i class="fa fa-shopping-cart"></i> -->
+                                                        <!--</a>-->
+                                                        <!--<a href="#">
+                                                            <i class="fa fa-heart"></i>
+                                                        </a>-->
+                                                        <!--<a href="#">
+                                                            <i class="fa fa-retweet"></i>
+                                                        </a>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <br />
+        <br />
+
+        <!-- OLD VERSION
+
+        <div class="container">
+
+            <div class="page-header" id="banner">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/client/foods/">Вернуться в Меню</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h2>Просмотр блюда</h2>
+                    </div>
+                </div>
+            </div>
+            &lt;!&ndash;/.page-header&ndash;&gt;
+
+            <div class="bs-docs-section">
+                <div class="row">
+                    <form th:object="${food}" method="post">
+                        &lt;!&ndash;            <form th:action="${formAction}" th:object="${food}" th:object="${foodDetail}" method="post">&ndash;&gt;
+                        <div class="goods-img" style="background-image:url('${food.image}')">
+                            <img th:src="@{'/images/' + ${food.image}}" width="400" height="300"/>
+                            <div class="item-tag">
+                            </div>
+                        </div>
+                        <div class="goods-cont">
+                            <h1 class="text" th:text="${food.name}"></h1>
+                            <div class="text">
+                                <span th:text="${food.description}"></span>
+                            </div>
+                            <div class="text">
+                                <p class="text-left" th:text="'Вес: '+${food.weight}+' гр'"> гр</p>
+                            </div>
+
+                            <div class="p-3 mb-2 bg-success text-white">
+                                Количество:
+                                <input type="text" th:name="quantity" placeholder="Количество" required="required"
+                                       class="form-control"/>
+                            </div>
+
+                            <div class="p-3 mb-2 bg-success text-white">
+                                <h3 th:text="'Цена: '+ ${food.price} + ' Р'" class="font-weight-bold"/>
+                            </div>
+
+                            <input type="submit" class="btn btn-success btn-lg" value="Добавить в корзину" />
+
+        &lt;!&ndash;                    <div class="goods-footer">&ndash;&gt;
+        &lt;!&ndash;                        <div class="goods-cost" style="position: relative">&ndash;&gt;
+        &lt;!&ndash;                            <a class="btn btn-success" th:href="@{'/client/order/' + ${food.id} + '/aadtoorder/'}">&ndash;&gt;
+        &lt;!&ndash;                                Добавить в корзину</a>&ndash;&gt;
+        &lt;!&ndash;                        </div>&ndash;&gt;
+        &lt;!&ndash;                    </div>&ndash;&gt;
+                        </div>
+                    </form>
+                </div>
+                &lt;!&ndash; /.row &ndash;&gt;
+            </div>
+            &lt;!&ndash; /.bs-docs-section &ndash;&gt;
+        </div>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsClient :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

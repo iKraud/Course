@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+    <!--<head th:replace="inc/head.inc::head"></head>-->
+    <head>
+        <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+        <script src="/js/vendor/jquery-1.12.0.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/jquery-ui.min.js"></script>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsClient :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+    </head>
+    <body>
+
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsClient :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <!--&lt;!&ndash; Navigation &ndash;&gt;-->
+        <!--<div th:replace="inc/top_nav.inc::top_nav"></div>-->
+
+        <div class="collapse_area coll2">
+            <div class="container">
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 text-center">
+                        <h2>Ваш заказ №9 принят</h2>
+                    </div>
+                </div>
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/client/foods">Вернуться в Меню</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <!--&lt;!&ndash; Page Content &ndash;&gt;
+        <div class="container">
+            <div class="text-center">
+        &lt;!&ndash;        <span th:text="'Ваш заказ №' + ${order.id} + 'принят'"></span>&ndash;&gt;
+                <h2>Ваш заказ №9 принят</h2>
+            </div>
+            <div class="btn-default">
+                <a class="btn btn-link" href="/client/foods">Вернуться в меню</a>
+            </div>
+        </div>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsClient :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

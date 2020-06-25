@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+    <!--<head th:replace="inc/head.inc::head"></head>-->
+    <head>
+        <!--<title>Список суши | Rollup</title>
+        <meta charset="UTF-8">-->
+        <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/jquery-ui.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+        <script src="/js/vendor/jquery-1.12.0.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/jquery-ui.min.js"></script>
+
+        <!-- FRAGMENT # 1: Service Information (without Title) -->
+        <!-- Service Information (Head Block) Without Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) Without Title END -->
+    </head>
+    <body>
+
+        <!-- FRAGMENT # 2: Header + IE8 -->
+        <!-- For IE8 Block and Header START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: header}"></div>
+        <!-- For IE8 Block and Header END -->
+
+        <!--&lt;!&ndash; Navigation &ndash;&gt;-->
+        <!--<div th:replace="inc/top_nav.inc::top_nav"></div>-->
+
+        <div class="collapse_area coll2">
+            <div class="container">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/client/foods">Перейти в клиентское Меню</a>
+                        <a class="blog7" href="/admin/food/add">Добавить блюдо</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse_area coll2">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="s-cart-all">
+                            <div class="cart-form table-responsive">
+                                <table id="shopping-cart-table" class="data-table cart-table">
+                                    <tbody>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Наименование блюда</th>
+                                        <th>Категория</th>
+                                        <th>Описание</th>
+                                        <th>Вес</th>
+                                        <th>Цена</th>
+                                        <th>Название файла</th>
+                                        <th>Изображение</th>
+                                        <th>Публикация</th>
+                                        <th>Редактировать</th>
+                                        <th>Удаление</th>
+                                        <!--<th class="low2">Наименование блюда</th>-->
+                                        <!--<th class="low5">Редактировать</th>-->
+                                        <!--<th>Категории</th>-->
+                                        <!--<th class="low1">Удаление</th>-->
+                                    </tr>
+                                    <tr th:if="${foods.isEmpty()}">
+                                        <td colspan="11">Нет блюд для отображения</td>
+                                    </tr>
+                                    <tr th:each="food, iterator : ${foods}">
+                                        <th scope="row" th:text="${iterator.index + 1}"></th>
+
+                                        <td class="sop-cart">
+                                            <span th:text="${food.name}"></span>
+                                            <!--<a href="#"><img class="primary-image" alt="" src="img/products/10.jpg"></a>-->
+                                        </td>
+                                        <td class="sop-cart">
+                                            <span th:text="${foodTypesList.get((food.foodTypeId)-1).name}"></span>
+                                        </td>
+                                        <td class="sop-cart an-sh">
+                                            <span th:text="${food.description}"></span>
+                                        </td>
+                                        <td class="sop-cart an-sh">
+                                            <span th:text="${food.weight}"></span>
+                                        </td>
+                                        <td class="sop-cart an-sh">
+                                            <span th:text="${food.price}"></span>
+                                        </td>
+                                        <td class="sop-cart an-sh">
+                                            <span th:text="${food.image}"></span>
+                                        </td>
+                                        <!--<td class="sop-cart">
+                                            <div class="tb-product-price font-noraure-3">
+                                                <span class="amount">$180.00</span>
+                                            </div>
+                                        </td>-->
+                                        <!--<td class="sop-cart">
+                                            <div class="last-cart l-mrgn wish">
+                                                <a class="las4" href="#"> Add to Cart</a>
+                                            </div>
+                                        </td>-->
+                                        <!--<td class="cen">-->
+                                        <td class="sop-cart an-sh">
+                                            <img th:src="@{'/images/' + ${food.image}}" width="75" height="50" />
+                                        </td>
+                                        <td class="sop-cart an-sh">
+                                            <span th:text="${food.active}"></span>
+                                        </td>
+                                        <td class="sop-cart an-sh">
+                                            <a th:href="@{'/admin/food/' + ${food.id} + '/edit/'}" >Редактировать</a>
+                                        </td>
+                                        <td class="sop-icon1">
+                                            <a th:href="@{'/admin/food/' + ${food.id} + '/delete/'}" >
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <!--&lt;!&ndash; Page Content &ndash;&gt;
+        <div class="container">
+
+            <div class="btn-default">
+                <a class="btn btn-link" href="/client/foods/">Перейти в клиентское Меню</a>
+                &lt;!&ndash;                        <button type="submit" class="btn btn-primary submit">Вернуться в Меню</button>&ndash;&gt;
+            </div>
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h1>Блюда</h1>
+                    </div>
+                </div>
+            </div>
+            &lt;!&ndash;/.page-header&ndash;&gt;
+
+            <div class="bs-docs-section">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+                            <a href="/admin/food/add/" class="btn btn-primary btn-lg">Добавить блюда</a>
+                        </p>
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Название блюда</th>
+                                <th>ID тип блюда</th>
+                                <th>Описание</th>
+                                <th>Вес</th>
+                                <th>Цена</th>
+                                <th>Название файла</th>
+                                <th>Изображение</th>
+                                <th>Публиковать</th>
+                                <th>Редактировать</th>
+                                <th>Удалить</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="food, iterator : ${foods}">
+                                <th scope="row" th:text="@{${iterator.index} + 1}"></th>
+
+                                <td>
+                                    <span th:text="${food.name}"></span>
+                                </td>
+                                <td>
+                                    &lt;!&ndash;                            <span th:text="${food.foodTypeId}"></span>&ndash;&gt;
+                                    <span th:text="${foodTypesList.get((food.foodTypeId)-1).name}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${food.description}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${food.weight}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${food.price}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${food.image}"></span>
+                                </td>
+                                <td>
+                                    <img th:src="@{'/images/' + ${food.image}}" width="75" height="50"/>
+                                </td>
+                                <td>
+                                    <span th:text="${food.active}"></span>
+                                </td>
+                                <td>
+                                    <a th:href="@{'/admin/food/' + ${food.id} + '/edit/'}"
+                                       class="btn btn-primary-sm">Изменить</a>
+                                </td>
+
+                                <td>
+                                    <a th:href="@{'/admin/food/' + ${food.id} + '/delete/'}"
+                                       class="btn btn-danger-sm">Удалить</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <meta charset="UTF-8" />
+        <title>Перечень меню | Rollup</title>
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link href="../static/css/style1.css" th:href="@{/static/css/style1.css}" rel="stylesheet"/>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <!--<div class="shopping-cart-area nr-wish-area">-->
+        <div class="collapse_area coll2">
+            <div class="container">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/admin/listmenu">Перечень Меню</a>
+                        <a class="blog7" href="/admin/addmenu">Добавить Меню</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="s-cart-all">
+                            <div class="cart-form table-responsive">
+                                <table id="shopping-cart-table" class="data-table cart-table">
+                                    <tbody>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th class="low2">Наименование</th>
+                                            <th class="low5">Редактировать</th>
+                                            <th>Категории</th>
+                                            <th class="low1">Удаление</th>
+                                        </tr>
+                                        <tr th:if="${listmenu.isEmpty()}">
+                                            <td colspan="5"> Нет меню для отображения </td>
+                                        </tr>
+                                        <tr th:each="item : ${listmenu}">
+                                            <td class="sop-cart">
+                                                <span th:text="${item.getId()}"></span>
+                                                <!--<a href="#"><img class="primary-image" alt="" src="img/products/10.jpg"></a>-->
+                                            </td>
+                                            <td class="sop-cart an-sh">
+                                                <div class="tb-beg">
+                                                    <b th:text="${item.getTitle()}"> </b>
+                                                    <!--<a href="#">Vintage Shoe</a>-->
+                                                </div>
+                                            </td>
+                                            <td class="sop-cart an-sh">
+                                                <!--<div class="tb-beg">-->
+                                                    <a th:href="'/admin/editmenu/' + ${item.getId()}"> Редактировать </a>
+                                                <!--</div>-->
+                                            </td>
+                                            <!--<td class="sop-cart">
+                                                <div class="tb-product-price font-noraure-3">
+                                                    <span class="amount">$180.00</span>
+                                                </div>
+                                            </td>-->
+                                            <!--<td class="sop-cart">
+                                                <div class="last-cart l-mrgn wish">
+                                                    <a class="las4" href="#"> Add to Cart</a>
+                                                </div>
+                                            </td>-->
+                                            <!--<td class="cen">-->
+                                            <td class="sop-cart an-sh">
+                                                <a th:href="'/admin/listmenufoodtype/' + ${item.getId()}"> Категории </a>
+                                                <!--<span class="wishlist-in-stock">In Stock</span>-->
+                                            </td>
+                                            <td class="sop-icon1">
+                                                <a th:href="'/admin/deletemenu/' + ${item.getId()}">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <!--<a href="/admin/listmenu">Перечень меню</a>
+        <br/>-->
+
+        <!--<h2>Перечень меню</h2>
+        <table width="100%" class="table">
+            <thead>
+            <tr>
+                <th scope="col"> ID </th>
+                <th scope="col"> Название </th>
+                <th scope="col"> Редактировать </th>
+                <th scope="col"> Удалить </th>
+                <th scope="col"> Категории </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${listmenu.isEmpty()}">
+                <td colspan="2"> Нет меню для отображения </td>
+            </tr>
+            <tr th:each="item : ${listmenu}">
+                <td scope="row"><span th:text="${item.getId()}"> </span></td>
+                <td>
+                    <span th:text="${item.getTitle()}"> </span>
+                </td>
+                <td>
+                    <a th:href="'/admin/editmenu/' + ${item.getId()}"> Редактировать </a>
+                </td>
+                <td>
+                    <a th:href="'/admin/deletemenu/' + ${item.getId()}"> Удалить </a>
+                </td>
+                <td>
+                    <a th:href="'/admin/listmenufoodtype/' + ${item.getId()}"> Категории </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

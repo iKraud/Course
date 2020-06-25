@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <!-- FRAGMENT # 1: Service Information (without Title) -->
+        <!-- Service Information (Head Block) Without Title START -->
+        <div th:replace="~{fragments/commonPartsClient :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) Without Title END -->
+
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: Header + IE8 -->
+        <!-- For IE8 Block and Header START -->
+        <div th:replace="~{fragments/commonPartsClient :: header}"></div>
+        <!-- For IE8 Block and Header END -->
+
+        <div class="infoDisplay">
+            <div class="row" th:if="${listFoodByTypeId.isEmpty()}">
+                <div class="col-sm-1 col-md-2"></div>
+                <div class="col-sm-10 col-md-8 text-center">
+                    <p>В данной категории продуктов нет...</p>
+                </div>
+                <div class="col-sm-1 col-md-2"></div>
+            </div>
+            <div class="row" th:each="food, iterator : ${listFoodByTypeId}">
+                <div class="col-sm-12 col-md-12">
+                    <p th:text="${food.getName()}"></p>
+                    <p th:text="${food.getDescription()}"></p>
+                    <p th:text="${food.getWeight()}"></p>
+                    <p th:text="${food.getPrice()}"></p>
+                    <p th:text="${food.getImage()}"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsClient :: footer}"></div>
+        <!-- Footer and JS Including END -->
+
+    </body>
+</html>

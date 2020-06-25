@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title> Перечень заказов | Rollup </title>
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link href="../static/css/style1.css" th:href="@{/static/css/style1.css}" rel="stylesheet"/>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsClient :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsClient :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <div class="pageStyle">
+            <!--    <div  th:replace="fragments/menu1.html"> </div>-->
+
+            <a href="/admin/listmenu"> Перечень меню </a>
+            <br/>
+
+            <h4> Перечень заказов </h4>
+            <table width="100%" class="table">
+                <thead>
+                <tr>
+                    <th scope="col"> ID заказа </th>
+                    <th scope="col"> ID клиента </th>
+                    <th scope="col"> Время создания заказа </th>
+                    <th scope="col"> Время завершения заказа </th>
+                    <th scope="col"> ID статуса заказа </th>
+                    <th scope="col"> Заметки </th>
+                    <th scope="col"> Адрес </th>
+                    <th scope="col"> Количество персон </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${listorders.isEmpty()}">
+                    <td colspan="2"></td>
+                </tr>
+                <tr th:each="item : ${listorders}">
+                    <td scope="row">
+                        <span th:text="${item.getId()}"> </span>
+                    </td>
+                    <td>
+                        <span th:text="${item.getUserId()}"> </span>
+                    </td>
+                    <td>
+                        <span th:text="${item.getCreatedAt()}"> </span>
+                    </td>
+                    <td>
+                        <span th:text="${item.getFinishedAt()}"> </span>
+                    </td>
+                    <td>
+                        <span th:text="${item.getOrderStatusId()}"> </span>
+                    </td>
+                    <td>
+                        <span th:text="${item.getNotes()}"> </span>
+                    </td>
+                    <td>
+                        <span th:text="${item.getAddress()}"> </span>
+                    </td>
+                    <td>
+                        <span th:text="${item.getPersons()}"> </span>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsClient :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>

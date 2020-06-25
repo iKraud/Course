@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonParts :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonParts :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <!-- ====================================================================== -->
+        <!-- Ваш раздел START -->
+        <div>
+            <!-- Ваш раздел -->
+        </div>
+        <!-- Ваш раздел END -->
+        <!-- ====================================================================== -->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonParts :: footer}"></div>
+        <!-- Footer and JS Including END -->
+
+    </body>
+</html>

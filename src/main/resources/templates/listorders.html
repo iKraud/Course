@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html lang="EN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+    <head>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+        <link href="../static/css/style1.css" th:href="@{/static/css/style1.css}" rel="stylesheet"/>
+
+        <!-- FRAGMENT # 1: Service Information -->
+        <!-- Service Information (Head Block) START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: serviceInfo}"></div>
+        <!-- Service Information (Head Block) END -->
+    </head>
+    <body>
+        <!-- FRAGMENT # 2: IE8 + Header + Page Title -->
+        <!-- For IE8 Block, Header and Page Title START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: header}"></div>
+        <!-- For IE8 Block, Header and Page Title END -->
+
+        <div class="collapse_area coll2">
+            <div class="container">
+                <div class="blog-area">
+                    <div class="tb-content7">
+                        <a class="blog7" href="/admin/listmenu">Перечень меню</a>
+                        <!--<a class="blog7" href="/admin/addfoodtype">Добавить категорию</a>-->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="faq-accordion">
+                            <div class="panel-group pas7" id="accordion" role="tablist" aria-multiselectable="true">
+                                <h4 th:if="${listorders.isEmpty()}">Нет заказов для отображения</h4>
+                                <div th:each="item : ${listorders}" class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed method" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" ><span th:text="'ID заказа: ' + ${item.getId()}"></span> <i class="fa fa-caret-down"></i></a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" >
+                                        <div class="row">
+                                            <div class="easy2">
+                                                <h2 th:text="'Информация о заказе # ' + ${item.getId()}"></h2>
+                                                <form class="form-horizontal" action="#">
+                                                    <fieldset>
+                                                        <legend>Детали</legend>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <h5>ID заказа:</h5>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <h5 th:text="${item.getId()}"> </h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <h5>Время создания заказа:</h5>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <h5 th:text="${item.getCreatedAt()}"> </h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <h5>Время завершения заказа:</h5>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <h5 th:text="${item.getFinishedAt()}"> </h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <h5>Статус заказа:</h5>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <h5 th:text="${item.getOrderStatus().getName()}"> </h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <h5>Заметки:</h5>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <h5 th:text="${item.getNotes()}"> </h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <h5>Адрес:</h5>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <h5 th:text="${item.getAddress()}"> </h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <h5>Имя клиента:</h5>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <h5 th:text="${item.getUsers().getUsername()}"> </h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <h5>Телефон клиента:</h5>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <h5 th:text="${item.getUsers().getPhone()}"> </h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <h5>E-mail клиента:</h5>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <h5 th:text="${item.getUsers().getEmail()}"> </h5>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                    <!--<div class="buttons clearfix">
+                                                        <div class="pull-left">
+                                                            <a class="btn btn-default ce5" href="#">Back</a>
+                                                        </div>
+                                                        <div class="pull-right">
+                                                            <input class="btn btn-primary ce5" type="submit" value="Continue">
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="blog-area">
+                                                        <div class="tb-content7">
+                                                            <a class="blog7" th:href="'/admin/browseorder/' + ${item.getId()}">Просмотреть заказ</a>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <!--<div class="pageStyle">
+
+            <a href="/admin/listmenu"> Перечень меню </a>
+            <br/>
+
+            <table width="100%" class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"> ID заказа </th>
+                        <th scope="col"> Время создания заказа </th>
+                        <th scope="col"> Время завершения заказа </th>
+                        <th scope="col"> Статус заказа </th>
+                        <th scope="col"> Заметки </th>
+                        <th scope="col"> Адрес </th>
+                        <th scope="col"> Количество персон </th>
+                        <th scope="col"> Имя клиента </th>
+                        <th scope="col"> Телефон клиента </th>
+                        <th scope="col"> E-mail клиента </th>
+                        <th scope="col"> Состав заказа  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${listorders.isEmpty()}">
+                        <td colspan="2"> Нет заказов для отображения </td>
+                    </tr>
+                    <tr th:each="item : ${listorders}">
+                        <td scope="row">
+                            <span th:text="${item.getId()}"> </span>
+                        </td>
+                        <td>
+                            <span th:text="${item.getCreatedAt()}"> </span>
+                        </td>
+                        <td>
+                            <span th:text="${item.getFinishedAt()}"> </span>
+                        </td>
+                        <td>
+                            <span th:text="${item.getOrderStatus().getName()}"> </span>
+                        </td>
+                        <td>
+                            <span th:text="${item.getNotes()}"> </span>
+                        </td>
+                        <td>
+                            <span th:text="${item.getAddress()}"> </span>
+                        </td>
+                        <td>
+                            <span th:text="${item.getPersons()}"> </span>
+                        </td>
+                        <td>
+                            <span th:text="${item.getUsers().getUsername()}"> </span>
+                        </td>
+                        <td>
+                            <span th:text="${item.getUsers().getPhone()}"> </span>
+                        </td>
+                        <td>
+                            <span th:text="${item.getUsers().getEmail()}"> </span>
+                        </td>
+                        <td>
+                            <a th:href="'/admin/browseorder/' + ${item.getId()}"> Просмотреть заказ </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>-->
+
+        <!-- FRAGMENT # 3: Footer + JS -->
+        <!-- Footer and JS Including START -->
+        <div th:replace="~{fragments/commonPartsAdmin :: footer}"></div>
+        <!-- Footer and JS Including END -->
+    </body>
+</html>
+
+
+
+
+
+

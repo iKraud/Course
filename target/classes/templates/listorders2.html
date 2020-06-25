@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Перечень заказов </title>
+</head>
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="../static/css/style1.css" th:href="@{/static/css/style1.css}" rel="stylesheet"/>
+
+<body>
+<div class="pageStyle">
+
+    <a href="/admin/listmenu"> Перечень меню </a>
+    <br/>
+
+    <h4> Перечень заказов </h4>
+    <table width="100%" class="table">
+        <thead>
+        <tr>
+            <th scope="col"> ID заказа </th>
+            <th scope="col"> Время создания заказа </th>
+            <th scope="col"> Время завершения заказа </th>
+            <th scope="col"> Статус заказа </th>
+            <th scope="col"> Заметки </th>
+            <th scope="col"> Адрес </th>
+            <th scope="col"> Количество персон </th>
+            <th scope="col"> Имя клиента </th>
+            <th scope="col"> Телефон клиента </th>
+            <th scope="col"> E-mail клиента </th>
+            <th scope="col"> Состав заказа  </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${listorders.isEmpty()}">
+            <td colspan="2"> Нет заказов для отображения </td>
+        </tr>
+        <tr th:each="item : ${listorders}">
+            <td scope="row">
+                <span th:text="${item.getId()}"> </span>
+            </td>
+            <td>
+                <span th:text="${item.getCreatedAt()}"> </span>
+            </td>
+            <td>
+                <span th:text="${item.getFinishedAt()}"> </span>
+            </td>
+            <td>
+                <span th:text="${item.getOrderStatus().getName()}"> </span>
+            </td>
+            <td>
+                <span th:text="${item.getNotes()}"> </span>
+            </td>
+            <td>
+                <span th:text="${item.getAddress()}"> </span>
+            </td>
+            <td>
+                <span th:text="${item.getPersons()}"> </span>
+            </td>
+            <td>
+                <span th:text="${item.getUsers().getUsername()}"> </span>
+            </td>
+            <td>
+                <span th:text="${item.getUsers().getPhone()}"> </span>
+            </td>
+            <td>
+                <span th:text="${item.getUsers().getEmail()}"> </span>
+            </td>
+            <td>
+                <a th:href="'/admin/browseorder/' + ${item.getId()}"> Просмотреть заказ </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
